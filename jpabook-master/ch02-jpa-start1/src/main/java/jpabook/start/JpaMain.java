@@ -41,6 +41,7 @@ public class JpaMain {
         member.setUsername("지한");
         member.setAge(2);
 
+
         //등록
         em.persist(member);
 
@@ -56,7 +57,7 @@ public class JpaMain {
         System.out.println("members.size=" + members.size());
 
         //삭제
-        em.remove(member);
+        //em.remove(member);
 
     }
 }
