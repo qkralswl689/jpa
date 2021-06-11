@@ -9,10 +9,11 @@ import java.util.List;
  */
 
 @Entity
+
 public class Member {
 
     @Id @GeneratedValue
-    @Column(name = "MEMBER_ID")
+    @Column(name="MEMBER_ID")
     private Long id;
 
     private String name;
@@ -20,8 +21,6 @@ public class Member {
     private String city;
     private String street;
     private String zipcode;
-
-    //Getter, Setter
 
     public Long getId() {
         return id;
