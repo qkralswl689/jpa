@@ -68,13 +68,37 @@ public class JpaMain {
 
             System.out.println("result = " + (findMember1 == findMember2));*/
 
-            Member member1 = new Member(150L,"A");
+           /* Member member1 = new Member(150L,"A");
             Member member2 = new Member(160L,"B");
 
             em.persist(member1);
             em.persist(member2);
             System.out.println("================");
 
+*/
+
+            Member member1 = new Member();
+            member1.setUsername("A");
+
+            Member member2 = new Member();
+            /*member.setId("ID_A");*/
+            member2.setUsername("B");
+            /*member.setRoleType(RoleType.ADMIN);*/
+
+            Member member3 = new Member();
+            member3.setUsername("A");
+
+            System.out.println("==========");
+
+            em.persist(member1); // 1,51
+            em.persist(member2); // MEM
+            em.persist(member3); // MEM
+
+            System.out.println("member.id = " + member1.getId());
+            System.out.println("member.id = " + member2.getId());
+            System.out.println("member.id = " + member3.getId());
+
+            System.out.println("==========");
 
             tx.commit();
         } catch (Exception e){
