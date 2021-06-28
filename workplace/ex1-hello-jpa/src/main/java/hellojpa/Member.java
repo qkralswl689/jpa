@@ -22,29 +22,54 @@ public class Member {
     /*@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "member_seq_generator")*/
        /* @GeneratedValue(strategy = GenerationType.TABLE,
                 generator = "MEMBER_SEQ_GENERATOR")*/
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "MEMBER_SEQ_GENERATOR")
+   /* @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "MEMBER_SEQ_GENERATOR")*/
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
         private Long id;
 
-    @Column(name = "name")
+    @Column(name = "USERNAME")
     private String username;
-   /* private Integer age;
 
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+ /*   @Column(name = "TEAM_ID")
+    private Long teamId;*/
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
+    public Team getTeam() {
+        return team;
+    }
 
-    private LocalDate testLocalDate;
-    private LocalDateTime testLocalDateTime;
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
-    @Lob
-    private String description;
-*/
+   /* public void changeTeam(Team team) {
+        this.team = team;
+
+        // 연관관계 편의메소드
+        team.getMembers().add(this);
+    }*/
+
+    /* private Integer age;
+
+            @Enumerated(EnumType.STRING)
+            private RoleType roleType;
+
+            @Temporal(TemporalType.TIMESTAMP)
+            private Date createdDate;
+
+            @Temporal(TemporalType.TIMESTAMP)
+            private Date lastModifiedDate;
+
+            private LocalDate testLocalDate;
+            private LocalDateTime testLocalDateTime;
+
+            @Lob
+            private String description;
+        */
     public Long getId() {
         return id;
     }

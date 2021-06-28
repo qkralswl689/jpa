@@ -77,13 +77,13 @@ public class JpaMain {
 
 */
 
-            Member member1 = new Member();
+    /*        Member member1 = new Member();
             member1.setUsername("A");
 
             Member member2 = new Member();
-            /*member.setId("ID_A");*/
+            *//*member.setId("ID_A");*//*
             member2.setUsername("B");
-            /*member.setRoleType(RoleType.ADMIN);*/
+            *//*member.setRoleType(RoleType.ADMIN);*//*
 
             Member member3 = new Member();
             member3.setUsername("A");
@@ -99,6 +99,51 @@ public class JpaMain {
             System.out.println("member.id = " + member3.getId());
 
             System.out.println("==========");
+
+            tx.commit();*/
+
+            // 저장 => 객체의 참조와 DB의 외래키 매핑 하여 연관관계 매핑
+
+            Team team = new Team();
+            team.setName("TeamA");
+           /* team.getMembers().add(member);*/
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+
+            //연관관계 편의 메소드
+           /* member.changeTeam(team); */
+            em.persist(member);
+
+            //연관관계 편의 메소드
+            team.addMember(member);
+
+
+            //1차 캐시가 아닌 DB 에서 가져옴
+            em.flush();
+            em.clear();
+
+            Member findMember = em.find(Member.class, member.getId());
+            List<Member> members = findMember.getTeam().getMembers();
+
+            for (Member m : members){
+                System.out.println("m = " + m.getUsername());
+            }
+/*
+
+            Member findMember = em.find(Member.class, member.getId());
+            List<Member> members = findMember.getTeam().getMembers();
+            for (Member m : members){
+                System.out.println("m = " + m.getUsername());
+            }
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam = " + findTeam.getName());
+
+            // 수정 -> 100번팀이 있다고 가정하에
+            Team newTeam = em.find(Team.class, 100L);
+            findMember.setTeam(newTeam);
+*/
 
             tx.commit();
         } catch (Exception e){
