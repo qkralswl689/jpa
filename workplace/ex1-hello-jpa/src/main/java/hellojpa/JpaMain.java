@@ -104,16 +104,16 @@ public class JpaMain {
 
             // 저장 => 객체의 참조와 DB의 외래키 매핑 하여 연관관계 매핑
 
-            Team team = new Team();
+       /*     Team team = new Team();
             team.setName("TeamA");
-           /* team.getMembers().add(member);*/
+           *//* team.getMembers().add(member);*//*
             em.persist(team);
 
             Member member = new Member();
             member.setUsername("member1");
 
             //연관관계 편의 메소드
-           /* member.changeTeam(team); */
+           *//* member.changeTeam(team); *//*
             em.persist(member);
 
             //연관관계 편의 메소드
@@ -129,7 +129,7 @@ public class JpaMain {
 
             for (Member m : members){
                 System.out.println("m = " + m.getUsername());
-            }
+            }*/
 /*
 
             Member findMember = em.find(Member.class, member.getId());
@@ -145,6 +145,17 @@ public class JpaMain {
             findMember.setTeam(newTeam);
 */
 
+   /*         // 1 : N 단방향
+            Member member = new Member();
+            member.setUsername("member1");
+            em.persist(member);
+
+            Team team = new Team();
+            team.setName("teamA");
+            team.getMembers().add(member);
+
+            em.persist(team);
+            */
             tx.commit();
         } catch (Exception e){
             tx.rollback();

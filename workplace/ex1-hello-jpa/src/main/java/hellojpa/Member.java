@@ -3,7 +3,9 @@ package hellojpa;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 // JPA 가 관리하는 객체라는 표시
 @Entity
@@ -31,20 +33,27 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
+    @OneToOne
+    @JoinColumn(name = "LOKER_ID")
+    private Locker locker;
+
+    @ManyToMany
+    @JoinTable(name = "MEMBER_PRODUCT")
+    private List<Product> products = new ArrayList<>();
  /*   @Column(name = "TEAM_ID")
     private Long teamId;*/
 
-    @ManyToOne
+/*    @ManyToOne
     @JoinColumn(name = "TEAM_ID")
-    private Team team;
+    private Team team;*/
 
-    public Team getTeam() {
+/*    public Team getTeam() {
         return team;
     }
 
     public void setTeam(Team team) {
         this.team = team;
-    }
+    }*/
 
    /* public void changeTeam(Team team) {
         this.team = team;

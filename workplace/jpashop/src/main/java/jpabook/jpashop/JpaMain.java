@@ -1,5 +1,8 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -13,10 +16,17 @@ public class JpaMain {
         EntityManager em = emf.createEntityManager(); //엔티티 매니저 생성
 
         EntityTransaction tx = em.getTransaction(); //트랜잭션 기능 획득
+        tx.begin(); //트랜잭션 시작
 
         try {
 
-            tx.begin(); //트랜잭션 시작
+            Order order = new Order();
+            em.persist(order);
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+
+            em.persist(orderItem);
             //TODO 비즈니스 로직
             tx.commit();//트랜잭션 커밋
 
