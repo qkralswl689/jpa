@@ -1,5 +1,6 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Book;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 
@@ -20,14 +21,23 @@ public class JpaMain {
 
         try {
 
-            Order order = new Order();
+      /*      Order order = new Order();
             em.persist(order);
 
             OrderItem orderItem = new OrderItem();
             orderItem.setOrder(order);
 
-            em.persist(orderItem);
+            em.persist(orderItem);*/
             //TODO 비즈니스 로직
+
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("김영한");
+            em.persist(book);
+
+       /*     em.flush();
+            em.clear();*/
+
             tx.commit();//트랜잭션 커밋
 
         } catch (Exception e) {

@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class JpaMain {
@@ -156,6 +157,51 @@ public class JpaMain {
 
             em.persist(team);
             */
+
+    /*        // 영화 저장
+            Movie movie = new Movie();
+            movie.setDirector("aaaa");
+            movie.setActor("bbb");
+            movie.setName("바람과 함께");
+            movie.setPrice(10000);
+
+            em.persist(movie);
+
+            em.flush();
+            em.clear();
+
+            Movie findMove = em.find(Movie.class, movie.getId());*/
+
+/*            // 영화 저장
+            Member member = new Member();
+            member.setUsername("user1");
+            member.setCreateBy("kim");
+            member.setCreateDate(LocalDateTime.now());
+
+            em.persist(member);
+
+            em.flush();
+            em.clear();*/
+
+      /*      Member member = em.find(Member.class, 1L);
+            PrintMember(member);
+
+            printMemberAndTeam(member);*/
+
+            Child ch1 = new Child();
+            Child ch2 = new Child();
+
+            Parent parent = new Parent();
+            parent.addChild(ch1);
+            parent.addChild(ch2);
+
+            em.persist(parent);
+
+            em.flush();
+            em.clear();
+            Parent findParent = em.find(Parent.class, parent.getId());
+            parent.getChildList().remove(0);
+
             tx.commit();
         } catch (Exception e){
             tx.rollback();
@@ -163,6 +209,17 @@ public class JpaMain {
             em.close();
         }
         emf.close();
+    }
+
+    private static void printMemberAndTeam(Member member) {
+        String username = member.getUsername();
+
+        /*Team team = member.getTeam();*/
+    }
+
+    private static void PrintMember(Member member) {
+        System.out.println("member = " + member.getUsername());
+
     }
 
 }

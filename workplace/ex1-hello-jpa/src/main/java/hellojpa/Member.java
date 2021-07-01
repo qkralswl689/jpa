@@ -14,11 +14,11 @@ import java.util.List;
         name = "MEMBER_SEQ_GENERATOR",
         table = "MY_SEQUENCES",
         pkColumnValue = "MEMBER_SEQ", allocationSize = 1)*/
-@SequenceGenerator(name = "MEMBER_SEQ_GENERATOR",
+/*@SequenceGenerator(name = "MEMBER_SEQ_GENERATOR",
         sequenceName = "MEMBER_SEQ", //매핑할 데이터베이스 시퀀스 이름
-        initialValue = 1, allocationSize = 50)
+        initialValue = 1, allocationSize = 50)*/
 
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     /*@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "member_seq_generator")*/
@@ -37,15 +37,17 @@ public class Member {
     @JoinColumn(name = "LOKER_ID")
     private Locker locker;
 
-    @ManyToMany
+ /*   @ManyToMany
     @JoinTable(name = "MEMBER_PRODUCT")
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();*/
+
+
  /*   @Column(name = "TEAM_ID")
     private Long teamId;*/
 
-/*    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
-    private Team team;*/
+    private Team team;
 
 /*    public Team getTeam() {
         return team;
