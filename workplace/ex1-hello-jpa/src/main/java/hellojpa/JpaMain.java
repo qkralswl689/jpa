@@ -4,6 +4,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -188,7 +191,7 @@ public class JpaMain {
 
             printMemberAndTeam(member);*/
 
-            Child ch1 = new Child();
+    /*        Child ch1 = new Child();
             Child ch2 = new Child();
 
             Parent parent = new Parent();
@@ -200,8 +203,18 @@ public class JpaMain {
             em.flush();
             em.clear();
             Parent findParent = em.find(Parent.class, parent.getId());
-            parent.getChildList().remove(0);
+            parent.getChildList().remove(0);*/
 
+          /*  List<Member> result = em.createQuery("select m FROM Member m where m.username like '%kim%'",Member.class).getResultList();*/
+
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+
+            Root<Member> m = query.from(Member.class);
+
+           /* CriteriaQuery<Member> cq =
+            query.select(m) .where(cb.equal((m.get("uwername"), "kim"));
+            List<Member> resultList = em.createQuery(cq).getResultList();*/
             tx.commit();
         } catch (Exception e){
             tx.rollback();
