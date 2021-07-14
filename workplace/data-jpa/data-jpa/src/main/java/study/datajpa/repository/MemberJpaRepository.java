@@ -8,17 +8,19 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 public class MemberJpaRepository {
-    
+
     @PersistenceContext
-    private EntityManager em; public Member save(Member member) {
+    private EntityManager em;
+
+    public Member save(Member member) {
         em.persist(member);
         return member;
     }
-    
+
     public void delete(Member member) {
         em.remove(member);
     }
-    
+
     // 전체 조회
     public List<Member> findAll() {
         // JPQL 사용
@@ -49,4 +51,28 @@ public class MemberJpaRepository {
                 .setParameter("age", age)
                 .getResultList();
     }
+
+    /*public List<Member> findByUsername(String username) {
+
+        List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+                .setParameter("username", username)
+                .getResultList();
+    }*/
+
+    // 페이징 -> 나이 10살, 이름 내림차순
+    public List<Member> findByPage(int age, int offset, int limit) {
+        return em.createQuery("select m from Member m where m.age = :age order by m.username desc")
+                        .setParameter("age", age)
+                        .setFirstResult(offset)
+                        .setMaxResults(limit)
+                        .getResultList();
+    }
+
+
+    public long totalCount(int age) {
+        return em.createQuery("select count(m) from Member m where m.age = :age", Long.class)
+                .setParameter("age", age)
+                .getSingleResult();
+    }
+
 }
